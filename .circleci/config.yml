@@ -10,9 +10,7 @@ jobs:
   publish:
     executor: docker-publisher
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "19:5c:6b:25:8c:3f:6c:46:8c:ac:dd:3c:50:15:87:92"
+      - add_ssh_keys
       - checkout
       - run: ssh -t $SSH_USER@$SSH_HOST 'rm -R soldat'
       - run: rsync -av -e ssh * $SSH_USER@$SSH_HOST:./soldat/
