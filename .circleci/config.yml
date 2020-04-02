@@ -15,7 +15,7 @@ jobs:
       - run: sudo apt-get install rsync
       - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'pkill soldat && rm -rf soldat || true'
       - run: rsync -av -e ssh * $SSH_USER@$SSH_HOST:./soldat/
-      - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'chmod +x soldat/soldatserver &&  ./soldat/soldatserver -d'
+      - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'chmod +x soldat/soldatserver &&  ./soldat/soldatserver &'
 
 workflows:
   publish:
