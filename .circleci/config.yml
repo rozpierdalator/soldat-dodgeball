@@ -8,6 +8,9 @@ executors:
 
 jobs:
   publish:
+    branches:
+      only:
+        - master
     executor: docker-publisher
     steps:
       - add_ssh_keys
