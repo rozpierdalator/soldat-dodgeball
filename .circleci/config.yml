@@ -14,12 +14,10 @@ jobs:
           fingerprints:
             - "19:5c:6b:25:8c:3f:6c:46:8c:ac:dd:3c:50:15:87:92"
       - checkout
-      - run: ls -la
-
+      - run: ssh -t $SSH_USER@$SSH_HOST 'rm -R soldat'
+      - run: rsync -av -e ssh * $SSH_USER@$SSH_HOST:./soldat/
 
 workflows:
-  # Name the workflow "welcome"
   publish:
-    # Run the welcome/run job in its own container
     jobs:
       - publish
