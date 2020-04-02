@@ -12,6 +12,7 @@ jobs:
     steps:
       - add_ssh_keys
       - checkout
+      - run: sudo apt-get install rsync
       - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'rm -rf soldat || true'
       - run: rsync -av -e ssh * $SSH_USER@$SSH_HOST:./soldat/
 
