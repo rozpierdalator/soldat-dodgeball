@@ -8,9 +8,6 @@ executors:
 
 jobs:
   publish:
-    branches:
-      only:
-        - master
     executor: docker-publisher
     steps:
       - add_ssh_keys
@@ -24,4 +21,7 @@ jobs:
 workflows:
   publish:
     jobs:
-      - publish
+      - publish:
+        filters:
+              branches:
+                only: master
