@@ -12,7 +12,7 @@ jobs:
     steps:
       - add_ssh_keys
       - checkout
-      - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'rm -R soldat'
+      - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'rm -rf soldat || true'
       - run: rsync -av -e ssh * $SSH_USER@$SSH_HOST:./soldat/
 
 workflows:
