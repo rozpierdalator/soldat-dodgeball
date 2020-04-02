@@ -1,16 +1,25 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+executors:
+  docker-publisher:
+    docker:
+      - image: cimg/base:2020.01
+
+jobs:
+  publish:
+    executor: docker-publisher
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "19:5c:6b:25:8c:3f:6c:46:8c:ac:dd:3c:50:15:87:92"
+      - checkout
+      - run: ls -la
+
+
 workflows:
   # Name the workflow "welcome"
-  deploy:
+  publish:
     # Run the welcome/run job in its own container
     jobs:
-      docker:
-        - image: cimg/base:2020.01
-      steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "19:5c:6b:25:8c:3f:6c:46:8c:ac:dd:3c:50:15:87:92"
-        - checkout
-        - run: ls -la
+      - publish
