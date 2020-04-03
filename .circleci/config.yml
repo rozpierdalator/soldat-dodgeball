@@ -17,6 +17,7 @@ jobs:
       - run: rsync -av -e ssh * $SSH_USER@$SSH_HOST:./soldat/
       - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'chmod +x soldat/soldatserver'
       - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST 'tmux new -d ./soldat/soldatserver'
+      - run: ssh -oStrictHostKeyChecking=no -t $SSH_USER@$SSH_HOST "sed -i 's/Admin_Password=/Admin_Password=$SOLDAT_ADMIN_PASSWORD/g' soldat/soldat.ini'
 
 workflows:
   publish:
